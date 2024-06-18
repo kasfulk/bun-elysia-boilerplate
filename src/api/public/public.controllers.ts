@@ -3,12 +3,31 @@ import { PublicServices } from './public.services';
 
 const _publicServices = new PublicServices();
 
-export const PublicController = createElysia().group('public', (app) => {
-  return app
-    .get('', () => {
+export const PublicController = createElysia({
+  prefix: '/public',
+  detail: {
+    tags: ['Public'],
+  },
+})
+  .get(
+    '',
+    () => {
       return _publicServices.checkServices();
-    })
-    .get('/api-trial', () => {
+    },
+    {
+      detail: {
+        tags: ['Public'],
+      },
+    },
+  )
+  .get(
+    '/api-trial',
+    () => {
       return _publicServices.apiTrial();
-    });
-});
+    },
+    {
+      detail: {
+        tags: ['Public'],
+      },
+    },
+  );
