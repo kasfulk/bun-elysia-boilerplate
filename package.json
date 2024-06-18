@@ -6,10 +6,24 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/cookie": "^0.8.0",
+    "@elysiajs/cors": "^1.0.2",
+    "@elysiajs/jwt": "^1.0.2",
+    "elysia": "latest",
+    "elysia-helmet": "^1.0.2",
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@eslint/js": "^9.5.0",
+    "@types/bcrypt": "^5.0.2",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "bun-types": "latest",
+    "eslint": "9.x",
+    "globals": "^15.6.0",
+    "prettier": "^3.3.2",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.13.1"
   },
   "module": "src/index.js"
 }
