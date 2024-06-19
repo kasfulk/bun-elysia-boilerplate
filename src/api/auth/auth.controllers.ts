@@ -59,10 +59,6 @@ export const AuthController = createElysia({
         username: t.String(),
         password: t.String(),
       }),
-      response: t.Object({
-        code: t.Number(),
-        message: t.String(),
-      }),
       detail: {
         // TODO: splitting into another files
         parameters: [

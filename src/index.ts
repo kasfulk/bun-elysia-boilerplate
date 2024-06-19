@@ -25,6 +25,9 @@ if (process.env.BUN_ENVIRONENT !== 'production') {
 
 app.use(api);
 
+app.onResponse(() => {
+  console.log('Response', performance.now());
+});
 app.listen(process.env.BUN_PORT || 3000);
 
 console.log(

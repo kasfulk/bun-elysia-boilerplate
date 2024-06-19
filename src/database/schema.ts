@@ -1,10 +1,11 @@
-import { sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { text, mysqlSchema, datetime } from 'drizzle-orm/mysql-core';
+export const mySchema = mysqlSchema('elysia');
 
-export const users = sqliteTable('users', {
+export const users = mySchema.table('users', {
   username: text('username').notNull().primaryKey(),
   password: text('password').notNull(),
   email: text('email').notNull(),
-  createdAt: text('createdAt').default('CURRENT_TIMESTAMP'),
-  updatedAt: text('updatedAt').default('CURRENT_TIMESTAMP'),
-  deletedAt: text('deletedAt').default('NULL'),
+  created_at: datetime('created_at'),
+  updated_at: datetime('updated_at'),
+  deleted_at: datetime('deleted_at'),
 });
