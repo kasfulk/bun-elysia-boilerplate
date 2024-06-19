@@ -19,10 +19,11 @@ export const AuthController = createElysia({
   .use(jwtRefreshSetup)
   .post(
     '/login',
-    async ({ body, jwtAccess, jwtRefresh, cookie }) => {
+    async ({ body, jwtAccess, jwtRefresh, cookie, set }) => {
       const { username, password } = body;
       const result = await _authServices.validateUser(username, password);
       if (!result.success) {
+        set.status = result.code;
         return {
           code: result.code,
           message: 'Invalid username or password',
@@ -80,7 +81,7 @@ export const AuthController = createElysia({
   )
   .post(
     '/register',
-    async ({ body, jwtAccess, jwtRefresh, cookie }) => {
+    async ({ body, jwtAccess, jwtRefresh, cookie, set }) => {
       const { username, password, email } = body;
       const result = await _authServices.registerUser({
         username,
@@ -88,6 +89,7 @@ export const AuthController = createElysia({
         email,
       });
       if (!result.success) {
+        set.status = result.code;
         return {
           code: result.code,
           message: 'Invalid username or password',
@@ -109,8 +111,9 @@ export const AuthController = createElysia({
         });
       }
 
+      set.status = 201;
       return {
-        code: 200,
+        code: 201,
         message: `Hello from register ${username}!`,
         data: {
           username: result.data?.username,
@@ -123,10 +126,6 @@ export const AuthController = createElysia({
         username: t.String(),
         password: t.String(),
         email: t.String(),
-      }),
-      response: t.Object({
-        code: t.Number(),
-        message: t.String(),
       }),
       detail: {
         // TODO: splitting into another files
